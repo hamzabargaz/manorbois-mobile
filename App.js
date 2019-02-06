@@ -20,6 +20,7 @@ import Login from "./src/components/login";
 import Signin from "./src/components/login/signin";
 import Signup from "./src/components/login/signup";
 import Home from "./src/components/home";
+import Commande from "./src/components/commande/index1";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -39,7 +40,7 @@ export default class App extends Component<Props> {
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}
         >
-          <Home />
+          <Commande />
         </ScrollView>
       </View>
     );
