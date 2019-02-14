@@ -4,7 +4,8 @@ import {
   Text,
   ViewPagerAndroid,
   ScrollView,
-  Image
+  Image,
+  StatusBar
 } from "react-native";
 import React, { Component } from "react";
 import {
@@ -53,6 +54,10 @@ export default class ViewPagerPage extends Component {
     };
   }
 
+  static navigationOptions = {
+    title: "Commande page"
+  };
+
   onValueChange(value) {
     this.setState({
       selected: value
@@ -72,10 +77,16 @@ export default class ViewPagerPage extends Component {
     this.setState({ currentPosition: 1 });
   };
 
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Auth");
+  };
+
   render() {
     return (
       <View style={styles.Form}>
-        <Text
+        <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
+        {/* <Text
           style={{
             textAlign: "center",
             color: "#fff",
@@ -85,7 +96,7 @@ export default class ViewPagerPage extends Component {
           }}
         >
           Votre commande
-        </Text>
+        </Text> */}
 
         <StepIndicator
           customStyles={customStyles}
@@ -320,8 +331,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "stretch"
-    // padding: 40
+    alignItems: "stretch",
+    // padding: 40,
+    backgroundColor: "#2196f3"
   },
   Item: {
     marginTop: 10,

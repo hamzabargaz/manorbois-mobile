@@ -1,71 +1,124 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, View, Text } from "react-native";
-import { ViewPager } from "rn-viewpager";
+import {
+  Text,
+  View,
+  StyleSheet,
+  StatusBar,
+  FlatList,
+  TouchableHighlight,
+  AsyncStorage
+} from "react-native";
+import LinearGradient from "react-native-linear-gradient";
+import axios from "axios";
+import CommandItem from "./CommandItem";
 
-import StepIndicator from "react-native-step-indicator";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+export class index extends Component {
+  static navigationOptions = {
+    title: "Commande List"
+  };
 
-// const labels = [
-//   { key: 1, value: "Page 1" },
-//   { key: 2, value: "Page 2" },
-//   { key: 3, value: "Page 3" },
-//   { key: 4, value: "Page 4" },
-//   { key: 5, value: "Page 5" }
-// ];
-
-const labels = [
-  "Cart",
-  "Delivery Address",
-  "Order Summary",
-  "Payment Method",
-  "Track"
-];
-
-const customStyles = {
-  stepIndicatorSize: 25,
-  currentStepIndicatorSize: 30,
-  separatorStrokeWidth: 2,
-  currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: "#fe7013",
-  stepStrokeWidth: 3,
-  stepStrokeFinishedColor: "#fe7013",
-  stepStrokeUnFinishedColor: "#aaaaaa",
-  separatorFinishedColor: "#fe7013",
-  separatorUnFinishedColor: "#aaaaaa",
-  stepIndicatorFinishedColor: "#fe7013",
-  stepIndicatorUnFinishedColor: "#ffffff",
-  stepIndicatorCurrentColor: "#ffffff",
-  stepIndicatorLabelFontSize: 13,
-  currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: "#fe7013",
-  stepIndicatorLabelFinishedColor: "#ffffff",
-  stepIndicatorLabelUnFinishedColor: "#aaaaaa",
-  labelColor: "#999999",
-  labelSize: 13,
-  currentStepLabelColor: "#fe7013"
-};
-
-export default class index extends Component {
   constructor() {
     super();
+    // this.ds = new ListView.DataSource({
+    //   rowHasChanged: (r1, r2) => r1 !== r2
+    // });
+    // const commandes = ["red", "blue", "yellow"];
     this.state = {
-      currentPosition: 0
+      commandes: [],
+      message: "",
+      errormsg: "",
+      idcl: 0
+      // DataSource: this.ds.cloneWithRows(["red", "blue", "yellow"])
     };
   }
 
-  render() {
-    return (
-      <StepIndicator
-        customStyles={customStyles}
-        currentPosition={this.state.currentPosition}
-        labels={labels}
-      />
-    );
+  componentDidMount() {
+    this.getdata();
   }
 
-  onPageChange(position) {
-    this.setState({ currentPosition: position });
+  // http://seetrip.fun/codgen/Cls/commandes
+
+  getdata = async () => {
+    console.log("it s work here");
+    await AsyncStorage.getItem("user_id")
+      .then(value => {
+        this.setState({ idcl: value });
+        console.log(" value async  :", value);
+      })
+      .catch(error => {
+        console.log(" error async  :", error);
+      });
+
+    console.log(" state async  :", this.state.idcl);
+    await axios
+      .get(
+        "http://seetrip.fun/codgen/Cls/getCommandeByIdCl/" +
+          this.state.idcl +
+          ""
+      )
+      .then(response => {
+        // console.log(response.data.message);
+        this.setState({
+          message: response.data.message,
+          commandes: response.data.commandes
+        });
+        console.log(this.state.commandes);
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          errormsg: error
+        });
+      });
+  };
+
+  render() {
+    return (
+      <LinearGradient
+        colors={["#0068bf", "#6ec5ff"]}
+        style={styles.linearGradient}
+      >
+        <View style={styles.container}>
+          <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
+          {/* <Text> {this.state.message} </Text> */}
+          <FlatList
+            data={this.state.commandes}
+            renderItem={({ item }) => (
+              <CommandItem
+                key={item.IDCMD}
+                cmdnumero={item.NUMCMD}
+                datecmd={item.DATECMD}
+                onSelect={() =>
+                  this.props.navigation.navigate("CommandDetail", { item })
+                }
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      </LinearGradient>
+    );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start"
+  },
+  linearGradient: {
+    flex: 1
+  }
+});
+
+// index.defaultProps = {
+//   onSelect: f => f
+// };
+
+// index.propTypes = {
+//   onColorSelected: React.PropTypes.func
+// };
+
+export default index;

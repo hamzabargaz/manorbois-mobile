@@ -16,46 +16,104 @@ import {
   ScrollView,
   StatusBar
 } from "react-native";
-import Login from "./src/components/login";
-import Signin from "./src/components/login/signin";
-import Signup from "./src/components/login/signup";
-import Home from "./src/components/home";
-import Commande from "./src/components/commande/index1";
 
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
+import Loader from "./src/components/Loader";
+
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createAppContainer
+} from "react-navigation";
+import Authservice from "./src/components/authservice";
+import LoginScreen from "./src/components/login";
+import Homepage from "./src/components/homepage";
+import Commande from "./src/components/commande";
+import Profile from "./src/components/profile";
+import CommandDetail from "./src/components/commande/CommandDetail";
+
+// import { Provider } from "react-redux";
+// import { createStore } from "redux";
+// import reducers from "./src/components/reducers";
+
+// import Navigation from "./src/components/Navigation";
+
+// const store = createStore(reducers);
+
+const AppStack = createStackNavigator({
+  Home: Homepage,
+  Commande: Commande,
+  CommandDetail: CommandDetail,
+  Profile: Profile
 });
+const AuthStack = createStackNavigator({ Login: LoginScreen });
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="rgb(0,157,224)" barStyle="light-content" />
-        {/* <Text style={styles.welcome}>Welcome to Manorbois</Text> */}
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-        >
-          <Commande />
-        </ScrollView>
-      </View>
-    );
-  }
-}
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: Authservice,
+      App: AppStack,
+      Auth: AuthStack
+    },
+    {
+      initialRouteName: "AuthLoading"
+    }
+  )
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgb(0,157,224)"
-  },
-  contentContainer: {
-    paddingVertical: 20
-  }
-});
+// type Props = {};
+// export default class App extends Component<Props> {
+//   state = { loggedIn: true };
+
+//   renderInitialView = () => {
+//     switch (this.state.loggedIn) {
+//       case true:
+//         return <Navigation />;
+
+//       case false:
+//         return <Login />;
+
+//       default:
+//         return <Loader size="large" />;
+//     }
+//   };
+
+//   render() {
+//     return (
+//       // <Provider>
+//       <View style={styles.container}>
+//         <StatusBar backgroundColor="rgb(0,157,224)" barStyle="light-content" />
+//         {/* <Text style={styles.welcome}>Welcome to Manorbois</Text> */}
+//         <ScrollView
+//           contentContainerStyle={styles.contentContainer}
+//           showsVerticalScrollIndicator={false}
+//         >
+//           {this.renderInitialView()}
+//         </ScrollView>
+//       </View>
+//       // </Provider>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     // flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "center",
+
+//     backgroundColor: "rgb(0,157,224)"
+//   },
+//   contentContainer: {
+//     paddingVertical: 20
+//   }
+// });
+
+// const MainNavigator = createStackNavigator({
+//   Home: {screen: HomeScreen},
+//   Profile: {screen: ProfileScreen},
+// });
+
+// const App = createAppContainer(MainNavigator);
+
+// export default App;
