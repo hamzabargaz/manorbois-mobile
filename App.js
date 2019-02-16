@@ -29,7 +29,10 @@ import LoginScreen from "./src/components/login";
 import Homepage from "./src/components/homepage";
 import Commande from "./src/components/commande";
 import Profile from "./src/components/profile";
+import Mappage from "./src/components/map";
+import About from "./src/components/about";
 import CommandDetail from "./src/components/commande/CommandDetail";
+import ViewPDF from "./src/components/commande/ViewPDF";
 
 // import { Provider } from "react-redux";
 // import { createStore } from "redux";
@@ -43,7 +46,10 @@ const AppStack = createStackNavigator({
   Home: Homepage,
   Commande: Commande,
   CommandDetail: CommandDetail,
-  Profile: Profile
+  Profile: Profile,
+  Map: Mappage,
+  About: About,
+  ViewPDF: ViewPDF
 });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
 

@@ -51,7 +51,7 @@ export class index extends Component {
             style={[styles.Item]}
             onPress={this._signOutAsync}
           >
-            <Text>I'm done, sign me out</Text>
+            <Text> se Déconnecter </Text>
           </Button>
 
           <Text
@@ -62,7 +62,7 @@ export class index extends Component {
               margin: 20
             }}
           >
-            Bienvenu
+            Bienvenue
           </Text>
           <Text
             style={{
@@ -119,10 +119,10 @@ export class index extends Component {
             </TouchableHighlight>
           </View>
 
-          {/* <View style={styles.Item}>
+          <View style={styles.Item}>
             <TouchableHighlight
               underlayColor="rgba(145, 145, 145,0.5)"
-              onPress={this._onPressButton}
+              onPress={() => this.props.navigation.navigate("Map")}
               style={{ backgroundColor: "#f0f0f0", borderRadius: 20 }}
             >
               <View style={styles.Btn}>
@@ -137,7 +137,7 @@ export class index extends Component {
 
             <TouchableHighlight
               underlayColor="rgba(145, 145, 145,0.5)"
-              onPress={this._onPressButton}
+              onPress={() => this.props.navigation.navigate("About")}
               style={{
                 backgroundColor: "#f0f0f0",
                 borderRadius: 10,
@@ -150,10 +150,10 @@ export class index extends Component {
                   type="Entypo"
                   style={styles.Iconbtn}
                 />
-                <Text style={styles.textbtn}>Commande infos</Text>
+                <Text style={styles.textbtn}>Contact-nous</Text>
               </View>
             </TouchableHighlight>
-          </View> */}
+          </View>
         </View>
       </LinearGradient>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, TouchableHighlight, StyleSheet } from "react-native";
+import { View, Text, TouchableHighlight, StyleSheet, con } from "react-native";
+import { Icon, Right } from "native-base";
 import PropTypes from "prop-types";
 import Moment from "moment";
 
@@ -23,16 +24,17 @@ export class CommandItem extends Component {
         onPress={() => onSelect()}
       >
         <View style={styles.item}>
-          <View style={styles.detail_name}>
-            <Text style={[styles.textitem, {}]}>Num de Commande : </Text>
-            <Text style={[styles.textitem, {}]}>Date :</Text>
+          <View style={styles.detail}>
+            <Text style={[styles.detailnumcmd, {}]}>
+              Command : #{cmdnumero}
+            </Text>
+            <Text style={[styles.detaildate, {}]}>
+              {Moment(datecmd).format("D / MM / YYYY")}
+            </Text>
           </View>
 
-          <View style={styles.detail_resp}>
-            <Text style={[styles.textitem, {}]}>{cmdnumero} </Text>
-            <Text style={[styles.textitem, {}]}>
-              {Moment(datecmd).toNow(true)}
-            </Text>
+          <View style={styles.iconarow}>
+            <Icon type="AntDesign" name="right" size={30} />
           </View>
         </View>
       </TouchableHighlight>
@@ -54,19 +56,28 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 10
   },
   item: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center"
   },
-  textitem: {
-    fontSize: 18,
+  detail: {
+    flex: 2,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     margin: 5
+  },
+  iconarow: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-end"
+  },
+  detailnumcmd: {
+    fontSize: 18,
+    marginBottom: 2
+  },
+  detaildate: {
+    // padding: 10
   }
-  // detail_name: {
-  //   padding: 10
-  // },
-  // detail_resp: {
-  //   padding: 10
-  // }
 });
 
 // commandItem.propTypes = {
