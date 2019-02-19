@@ -29,6 +29,7 @@ import LoginScreen from "./src/components/login";
 import Homepage from "./src/components/homepage";
 import Commande from "./src/components/commande";
 import Profile from "./src/components/profile";
+import Updateprofile from "./src/components/profile/update";
 import Mappage from "./src/components/map";
 import About from "./src/components/about";
 import CommandDetail from "./src/components/commande/CommandDetail";
@@ -47,6 +48,7 @@ const AppStack = createStackNavigator({
   Commande: Commande,
   CommandDetail: CommandDetail,
   Profile: Profile,
+  Update: Updateprofile,
   Map: Mappage,
   About: About,
   ViewPDF: ViewPDF

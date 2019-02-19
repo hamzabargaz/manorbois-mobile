@@ -11,6 +11,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
 import CommandItem from "./CommandItem";
+import Loader from "../Loader";
 
 export class index extends Component {
   static navigationOptions = {
@@ -19,16 +20,12 @@ export class index extends Component {
 
   constructor() {
     super();
-    // this.ds = new ListView.DataSource({
-    //   rowHasChanged: (r1, r2) => r1 !== r2
-    // });
-    // const commandes = ["red", "blue", "yellow"];
     this.state = {
       commandes: [],
       message: "",
       errormsg: "",
-      idcl: 0
-      // DataSource: this.ds.cloneWithRows(["red", "blue", "yellow"])
+      idcl: 0,
+      loading: false
     };
   }
 
@@ -36,9 +33,8 @@ export class index extends Component {
     this.getdata();
   }
 
-  // http://seetrip.fun/codgen/Cls/commandes
-
   getdata = async () => {
+    this.setState({ loading: true });
     console.log("it s work here");
     await AsyncStorage.getItem("user_id")
       .then(value => {
@@ -60,7 +56,8 @@ export class index extends Component {
         // console.log(response.data.message);
         this.setState({
           message: response.data.message,
-          commandes: response.data.commandes
+          commandes: response.data.commandes,
+          loading: false
         });
         console.log(this.state.commandes);
       })
@@ -81,20 +78,24 @@ export class index extends Component {
         <View style={styles.container}>
           <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
           {/* <Text> {this.state.message} </Text> */}
-          <FlatList
-            data={this.state.commandes}
-            renderItem={({ item }) => (
-              <CommandItem
-                key={item.IDCMD}
-                cmdnumero={item.NUMCMD}
-                datecmd={item.DATECMD}
-                onSelect={() =>
-                  this.props.navigation.navigate("CommandDetail", { item })
-                }
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          {this.state.loading ? (
+            <Loader size="large" />
+          ) : (
+            <FlatList
+              data={this.state.commandes}
+              renderItem={({ item }) => (
+                <CommandItem
+                  key={item.IDCMD}
+                  cmdnumero={item.NUMCMD}
+                  datecmd={item.DATECMD}
+                  onSelect={() =>
+                    this.props.navigation.navigate("CommandDetail", { item })
+                  }
+                />
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          )}
         </View>
       </LinearGradient>
     );

@@ -18,23 +18,23 @@ const customStyles = {
   currentStepIndicatorSize: 30,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: "#7eaec4",
+  stepStrokeCurrentColor: "#0069c0",
   stepStrokeWidth: 3,
-  stepStrokeFinishedColor: "#7eaec4",
+  stepStrokeFinishedColor: "#0069c0",
   stepStrokeUnFinishedColor: "#dedede",
-  separatorFinishedColor: "#7eaec4",
+  separatorFinishedColor: "#0069c0",
   separatorUnFinishedColor: "#dedede",
-  stepIndicatorFinishedColor: "#7eaec4",
+  stepIndicatorFinishedColor: "#0069c0",
   stepIndicatorUnFinishedColor: "#ffffff",
   stepIndicatorCurrentColor: "#ffffff",
   stepIndicatorLabelFontSize: 0,
   currentStepIndicatorLabelFontSize: 0,
   stepIndicatorLabelCurrentColor: "#ffffff",
   stepIndicatorLabelFinishedColor: "#ffffff",
-  stepIndicatorLabelUnFinishedColor: "#7eaec4",
+  stepIndicatorLabelUnFinishedColor: "#0069c0",
   labelColor: "#999999",
   labelSize: 13,
-  currentStepLabelColor: "#7eaec4"
+  currentStepLabelColor: "#0069c0"
 };
 
 export class CommandDetail extends Component {
@@ -108,7 +108,8 @@ export class CommandDetail extends Component {
       commerc_id,
       conduct_id
     } = navigation.getParam("item");
-    const uri = "https://www.seetrip.fun/codgen/admin/facture/Test/1";
+    const uri =
+      "https://www.seetrip.fun/codgen/Cls/GenerateFacture/" + IDCMD + "";
 
     return (
       <LinearGradient
@@ -130,21 +131,22 @@ export class CommandDetail extends Component {
                 labels={labels}
               />
             </View>
+
             <View style={styles.Detailcmd}>
               <View style={styles.itemdetail}>
                 <View style={styles.icon}>
                   <Icon
-                    style={{ fontSize: 50 }}
-                    type="MaterialCommunityIcons"
-                    name="package-variant-closed"
+                    style={{ fontSize: 40, color: "#0069c0" }}
+                    type="Octicons"
+                    name="organization"
                   />
                 </View>
                 <View style={styles.detaildata}>
-                  <Text>
+                  <Text style={{ margin: 2 }}>
                     <Text style={styles.alltext}>Numero de la commande: </Text>
                     {NUMCMD}
                   </Text>
-                  <Text>
+                  <Text style={{ margin: 2 }}>
                     <Text style={styles.alltext}>Date de la commande: </Text>
                     {Moment({ DATECMD }).format("D / MM / YYYY")}
                   </Text>
@@ -153,19 +155,19 @@ export class CommandDetail extends Component {
               <View style={styles.itemdetail}>
                 <View style={styles.icon}>
                   <Icon
-                    style={{ fontSize: 40 }}
+                    style={{ fontSize: 40, color: "#0069c0" }}
                     type="FontAwesome5"
                     name="truck"
                   />
                 </View>
                 <View style={styles.detaildata}>
-                  <Text>
+                  <Text style={{ margin: 2 }}>
                     <Text style={styles.alltext}>
                       Adresse de la livraison:{" "}
                     </Text>
                     {ADRESSELIV}
                   </Text>
-                  <Text>
+                  <Text style={{ margin: 2 }}>
                     <Text style={styles.alltext}>Date de la livraison: </Text>
                     {Moment({ DATELIV }).format("D / MM / YYYY")}
                   </Text>
@@ -174,34 +176,42 @@ export class CommandDetail extends Component {
               <View style={styles.itemdetail}>
                 <View style={styles.icon}>
                   <Icon
-                    style={{ fontSize: 40 }}
+                    style={{ fontSize: 40, color: "#0069c0" }}
                     type="FontAwesome"
                     name="user-circle"
                   />
                 </View>
                 <View style={[styles.detaildata, {}]}>
-                  <Text>
+                  <Text style={{ margin: 2 }}>
                     <Text style={styles.alltext}> Nom du commercial: </Text>
                     {Commercial}
                   </Text>
-                  <Text>
-                    <Text style={styles.alltext}>
-                      Telephone du commercial:{" "}
-                    </Text>
+                  <Text style={{ margin: 2 }}>
+                    <Text style={styles.alltext}>Telephone du commercial:</Text>
                     {Phone}
                   </Text>
                 </View>
               </View>
-              <View style={styles.itemdetail}>
+              <View style={styles.btnfacture}>
                 <Button
-                  style={{}}
+                  style={
+                    {
+                      // flex: 1,
+                      // justifyContent: "center",
+                      // justifyContent: "center"
+                      // marginLeft: 110,
+                      // marginTop: 50
+                    }
+                  }
                   primary
                   onPressIn={event => {
                     event.preventDefault();
                     this.props.navigation.navigate("ViewPDF", { uri });
                   }}
                 >
-                  <Text>Générer votre Facture</Text>
+                  <Text style={{ color: "white", padding: 10 }}>
+                    Générer votre Facture
+                  </Text>
                 </Button>
               </View>
             </View>
@@ -238,9 +248,10 @@ const styles = StyleSheet.create({
   },
   itemdetail: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     margin: 5,
+    width: "97%",
     borderWidth: 1,
     borderRadius: 2,
     borderColor: "#ddd",
@@ -253,18 +264,30 @@ const styles = StyleSheet.create({
   },
   icon: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  detaildata: {
-    flex: 3,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    margin: 5
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#0069c0"
+  },
+  detaildata: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    margin: 10
   },
   alltext: {
     fontSize: 15,
     fontWeight: "bold"
+  },
+  btnfacture: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center",
+    marginTop: 5,
+    width: "100%"
   }
 });
 

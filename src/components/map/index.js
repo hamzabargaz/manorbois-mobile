@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, StatusBar } from "react-native";
 import { Form, Item, Input, Button, Text, Picker, Icon } from "native-base";
 import LinearGradient from "react-native-linear-gradient";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
 export class index extends Component {
   constructor(props) {
@@ -27,12 +27,17 @@ export class index extends Component {
             style={styles.map}
             provider={PROVIDER_GOOGLE} // remove if not using Google Maps
             initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
+              latitude: 33.5898263,
+              longitude: -7.6024001,
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421
             }}
-          />
+          >
+            <Marker
+              coordinate={{ latitude: 33.5898263, longitude: -7.6024001 }}
+              image={require("../../assets/img/pin-truck.png")}
+            />
+          </MapView>
         </View>
       </LinearGradient>
     );

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "810408760476",
+    "firebase_url": "https://manorbois-1550237318219.firebaseio.com",
+    "project_id": "manorbois-1550237318219",
+    "storage_bucket": "manorbois-1550237318219.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810408760476:android:4fc5cca68a928945",
+        "android_client_info": {
+          "package_name": "com.manorbois"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810408760476-8hn5e07l4rruc9gbc72u2qh6qeupm8kj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDz1_pVvyVmRxL6B7xv8YVOtRa0QLtSWtI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

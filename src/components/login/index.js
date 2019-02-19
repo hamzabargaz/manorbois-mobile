@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Image, AsyncStorage, StatusBar } from "react-native";
-import { Form, Item, Input, Button, Text } from "native-base";
+import {
+  View,
+  StyleSheet,
+  Image,
+  AsyncStorage,
+  StatusBar,
+  ImageBackground
+} from "react-native";
+import { Form, Item, Input, Button, Text, Label } from "native-base";
 import Loader from "../Loader";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
@@ -61,7 +68,12 @@ export class index extends Component {
       return <Loader size="large" />;
     } else {
       return (
-        <Button block rounded style={[styles.Item]} onPress={this._signInAsync}>
+        <Button
+          block
+          rounded
+          style={[styles.Item, { marginLeft: 50, marginRight: 50 }]}
+          onPress={this._signInAsync}
+        >
           <Text>Se Connecter</Text>
         </Button>
       );
@@ -70,48 +82,45 @@ export class index extends Component {
 
   render() {
     return (
-      <LinearGradient
-        colors={["#0068bf", "#6ec5ff"]}
-        style={styles.linearGradient}
+      // <LinearGradient
+      //   colors={["#0068bf", "#6ec5ff"]}
+      //   style={styles.linearGradient}
+      // >
+      <ImageBackground
+        source={require("../../assets/img/artboard1x.png")}
+        style={styles.bgimg}
       >
         <Form style={styles.Form}>
           <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
           <Image
-            source={require("../../assets/img/delivery-truck.png")}
-            style={{ height: 100, width: 100 }}
+            source={require("../../assets/img/logo_manorbois-white.png")}
+            style={{ height: 120, width: 200 }}
           />
-          <Text
-            style={{
-              textAlign: "center",
-              color: "#fff",
-              fontSize: 35,
-              fontWeight: "700",
-              margin: 5
-            }}
-          >
-            Track Service
-          </Text>
-          <Text
-            style={{
-              color: "#000",
-              fontSize: 14,
-              fontWeight: "100",
-              margin: 5,
-              textAlign: "center"
-            }}
-          >
-            Veuillez vous identfier pour suivre votre commande
-          </Text>
-          <Item rounded style={styles.Item}>
+
+          <Item regular style={styles.Item}>
             <Input
               placeholder="Adresse Email"
+              placeholderTextColor="white"
               style={styles.Textfield}
               onChangeText={identity => this.setState({ identity })}
             />
           </Item>
-          <Item rounded style={styles.Item}>
+          {/* <Item floatingLabel style={styles.Item}>
+              <Label>Adresse Email</Label>
+              <Input style={styles.Textfield}
+              onChangeText={identity => this.setState({ identity })} />
+            </Item>
+            <Item floatingLabel style={styles.Item}>
+              <Label>Mot de passe</Label>
+              <Input style={styles.Textfield}
+              style={styles.Textfield}
+              secureTextEntry={true}
+              onChangeText={password => this.setState({ password })} />
+            </Item> */}
+          <Item regular style={styles.Item}>
             <Input
               placeholder="Mot de passe"
+              placeholderTextColor="white"
               style={styles.Textfield}
               secureTextEntry={true}
               onChangeText={password => this.setState({ password })}
@@ -129,7 +138,8 @@ export class index extends Component {
           </Text>
           {this.renderLoader()}
         </Form>
-      </LinearGradient>
+      </ImageBackground>
+      // </LinearGradient>
     );
   }
 }
@@ -140,30 +150,35 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: 40
+    padding: 30
   },
   linearGradient: {
     flex: 1
   },
+  bgimg: {
+    flex: 1
+    // width: "100%",
+    // height: "100%"
+  },
   Item: {
-    marginTop: 30,
+    marginTop: 10,
     marginLeft: 30,
     marginRight: 30,
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    color: "#6ec6ff",
-    borderRadius: 15,
-    borderColor: "#6ec6ff"
+    color: "#fff",
+    borderRadius: 10,
+    borderColor: "#fff"
     // borderWidth: 2
   },
   Textfield: {
     color: "#fff",
     fontSize: 16,
     textAlign: "center",
-    borderRadius: 15,
-    borderColor: "#6ec6ff",
-    borderWidth: 2
+    borderRadius: 7,
+    borderColor: "#fff",
+    borderWidth: 1
   }
 });
 
