@@ -138,6 +138,7 @@ export class index extends Component {
                 onChangeText={value => {
                   this.setState({ nom: value });
                 }}
+                textContentType="familyName"
               />
             </Item>
             <Item regular style={styles.Item}>
@@ -147,6 +148,7 @@ export class index extends Component {
                 onChangeText={value => {
                   this.setState({ prenom: value });
                 }}
+                textContentType="name"
               />
             </Item>
             <Item regular style={styles.Item}>
@@ -156,6 +158,8 @@ export class index extends Component {
                 onChangeText={value => {
                   this.setState({ telephone: value });
                 }}
+                textContentType="telephoneNumber"
+                keyboardType="phone-pad"
               />
             </Item>
             <Item regular style={styles.Item}>
@@ -183,6 +187,7 @@ export class index extends Component {
                 onChangeText={value => {
                   this.setState({ password: value });
                 }}
+                textContentType="newPassword"
               />
             </Item>
             <Item regular style={styles.Item}>
@@ -193,6 +198,7 @@ export class index extends Component {
                 onChangeText={value => {
                   this.setState({ confirmationpassword: value });
                 }}
+                textContentType="newPassword"
               />
             </Item>
             <Text

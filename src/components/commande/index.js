@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   FlatList,
+  SectionList,
   TouchableHighlight,
   AsyncStorage
 } from "react-native";
@@ -22,6 +23,10 @@ export class index extends Component {
     super();
     this.state = {
       commandes: [],
+      enattente: [],
+      encours: [],
+      livrer: [],
+      facture: [],
       message: "",
       errormsg: "",
       idcl: 0,
@@ -36,30 +41,53 @@ export class index extends Component {
   getdata = async () => {
     this.setState({ loading: true });
     console.log("it s work here");
-    await AsyncStorage.getItem("user_id")
-      .then(value => {
-        this.setState({ idcl: value });
-        console.log(" value async  :", value);
-      })
-      .catch(error => {
-        console.log(" error async  :", error);
-      });
+    const idCl = await AsyncStorage.getItem("user_id");
 
-    console.log(" state async  :", this.state.idcl);
+    console.log(" id cl  :", idCl);
     await axios
-      .get(
-        "http://seetrip.fun/codgen/Cls/getCommandeByIdCl/" +
-          this.state.idcl +
-          ""
-      )
+      .get("http://seetrip.fun/codgen/Cls/getCommandeByIdCl/" + idCl + "")
       .then(response => {
         // console.log(response.data.message);
         this.setState({
           message: response.data.message,
-          commandes: response.data.commandes,
+          commandes: response.data.commandes
+        });
+        this.state.commandes.map(commands => {
+          switch (commands.ETAT) {
+            case "En attente":
+              this.setState({
+                enattente: [...this.state.enattente, commands]
+              });
+              break;
+            case "En Cours":
+              this.setState({
+                encours: [...this.state.encours, commands]
+              });
+              break;
+            case "Livrer":
+              this.setState({
+                livrer: [...this.state.livrer, commands]
+              });
+              break;
+            case "Facturé":
+              this.setState({
+                facture: [...this.state.facture, commands]
+              });
+              break;
+
+            default:
+              this.setState({ currentPosition: 0 });
+              break;
+          }
+        });
+        this.setState({
           loading: false
         });
-        console.log(this.state.commandes);
+        console.log(" Commands : ", this.state.commandes);
+        console.log(" En attente : ", this.state.enattente);
+        console.log(" En cours : ", this.state.encours);
+        console.log(" Livrer : ", this.state.livrer);
+        console.log(" Facture : ", this.state.facture);
       })
       .catch(error => {
         console.log(error);
@@ -77,11 +105,37 @@ export class index extends Component {
       >
         <View style={styles.container}>
           <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
+
           {/* <Text> {this.state.message} </Text> */}
           {this.state.loading ? (
             <Loader size="large" />
           ) : (
-            <FlatList
+            <SectionList
+              renderItem={({ item, index, section }) => (
+                // <Text key={index}>{item.IDCMD}</Text>
+                <CommandItem
+                  key={item.IDCMD}
+                  cmdnumero={item.NUMCMD}
+                  datecmd={item.DATECMD}
+                  onSelect={() =>
+                    this.props.navigation.navigate("CommandDetail", { item })
+                  }
+                />
+              )}
+              renderSectionHeader={({ section: { title } }) => (
+                <Text style={styles.sectionheader}>{title}</Text>
+              )}
+              sections={[
+                { title: "En Attente", data: this.state.enattente },
+                { title: "En Cours", data: this.state.encours },
+                { title: "Livrer", data: this.state.livrer },
+                { title: "Facture", data: this.state.facture }
+              ]}
+              keyExtractor={(item, index) => item + index}
+            />
+          )}
+
+          {/* <FlatList
               data={this.state.commandes}
               renderItem={({ item }) => (
                 <CommandItem
@@ -94,8 +148,7 @@ export class index extends Component {
                 />
               )}
               keyExtractor={(item, index) => index.toString()}
-            />
-          )}
+            /> */}
         </View>
       </LinearGradient>
     );
@@ -111,6 +164,15 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1
+  },
+  sectionheader: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: "center",
+    fontSize: 20,
+    backgroundColor: "#f0f0f0",
+    color: "#535353"
   }
 });
 

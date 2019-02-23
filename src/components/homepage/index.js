@@ -9,14 +9,16 @@ import {
 } from "react-native";
 import { Item, Button, Text, Icon } from "native-base";
 import LinearGradient from "react-native-linear-gradient";
-import firebase from "react-native-firebase";
+import firebase, { RNFirebase } from "react-native-firebase";
 import axios from "axios";
 
 export class index extends Component {
   constructor() {
     super();
     this.state = {
-      text: ""
+      text: "",
+      nom: "",
+      prenom: ""
     };
   }
 
@@ -58,6 +60,7 @@ export class index extends Component {
   async componentDidMount() {
     this.checkPermission();
     this.createNotificationListeners(); //add this line
+    this._getuserData();
   }
 
   componentWillUnmount() {
@@ -96,9 +99,11 @@ export class index extends Component {
           // .setSubtitle(notification.subtitle)
           .setBody(notification.body)
           // .setData(notification.data)
-          .android.setChannelId("fcm_default_channel") // e.g. the id you chose above
-          .android.setSmallIcon("@mipmap/ic_launcher_round") // create this icon in Android Studio
-          .android.setColor("#000000") // you can set a color here
+          .android.setChannelId("fcm_default_channel")
+          // .android.setBadgeIconType()
+          .android.setLargeIcon("ic_notification")
+          // .android.setSmallIcon("ic_notification")
+          .android.setColor("#2196f3")
           .android.setPriority(firebase.notifications.Android.Priority.High);
 
         firebase
@@ -111,7 +116,7 @@ export class index extends Component {
       "fcm_default_channel",
       "Manorbois",
       firebase.notifications.Android.Importance.High
-    ).setDescription("Manorbois description");
+    ).setDescription("Manorbois channel test");
     // .setSound('sampleaudio.mp3');
     firebase.notifications().android.createChannel(channel);
 
@@ -195,6 +200,26 @@ export class index extends Component {
 
   /************************************************************************* */
 
+  _getuserData = async () => {
+    const iduser = await AsyncStorage.getItem("user_id");
+
+    axios({
+      method: "post",
+      url: "https://seetrip.fun/codgen/Cls/getUser/" + iduser + ""
+    })
+      .then(response => {
+        console.log("response get user is : ", response.data);
+        this.setState({
+          nom: response.data.user["0"].last_name,
+          prenom: response.data.user["0"].first_name
+          // loading: false
+        });
+      })
+      .catch(err => {
+        console.log("Error logging in : ...", err);
+      });
+  };
+
   _onPressButton = () => {
     this.setState({
       text: "its works"
@@ -244,7 +269,7 @@ export class index extends Component {
               textAlign: "center"
             }}
           >
-            Mr. HAMZA
+            Mr.{this.state.nom}
           </Text>
         </View>
 

@@ -45,7 +45,10 @@ export class CommandItem extends Component {
 const styles = StyleSheet.create({
   wrapitem: {
     backgroundColor: "#f0f0f0",
-    margin: 10,
+    marginTop: 5,
+    marginRight: 10,
+    marginBottom: 5,
+    marginLeft: 10,
     padding: 10,
     flex: 1,
     flexDirection: "row",

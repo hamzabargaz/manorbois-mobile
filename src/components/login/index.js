@@ -103,20 +103,10 @@ export class index extends Component {
               placeholderTextColor="white"
               style={styles.Textfield}
               onChangeText={identity => this.setState({ identity })}
+              keyboardType="email-address"
+              textContentType="emailAddress"
             />
           </Item>
-          {/* <Item floatingLabel style={styles.Item}>
-              <Label>Adresse Email</Label>
-              <Input style={styles.Textfield}
-              onChangeText={identity => this.setState({ identity })} />
-            </Item>
-            <Item floatingLabel style={styles.Item}>
-              <Label>Mot de passe</Label>
-              <Input style={styles.Textfield}
-              style={styles.Textfield}
-              secureTextEntry={true}
-              onChangeText={password => this.setState({ password })} />
-            </Item> */}
           <Item regular style={styles.Item}>
             <Input
               placeholder="Mot de passe"
@@ -124,6 +114,8 @@ export class index extends Component {
               style={styles.Textfield}
               secureTextEntry={true}
               onChangeText={password => this.setState({ password })}
+              onSubmitEditing={this._signInAsync}
+              textContentType="password"
             />
           </Item>
           <Text
