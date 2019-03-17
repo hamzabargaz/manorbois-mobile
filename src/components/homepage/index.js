@@ -11,6 +11,7 @@ import { Item, Button, Text, Icon } from "native-base";
 import LinearGradient from "react-native-linear-gradient";
 import firebase, { RNFirebase } from "react-native-firebase";
 import axios from "axios";
+import OfflineNotice from "../OfflineNotice";
 
 export class index extends Component {
   constructor() {
@@ -91,7 +92,7 @@ export class index extends Component {
         // alert('message');
 
         const localNotification = new firebase.notifications.Notification({
-          // sound: 'sampleaudio',
+          sound: "default",
           show_in_foreground: true
         })
           .setNotificationId(notification.notificationId)
@@ -148,6 +149,27 @@ export class index extends Component {
     this.messageListener = firebase.messaging().onMessage(message => {
       //process data message
       console.log(JSON.stringify(message));
+      const DataNotification = new firebase.notifications.Notification({
+        sound: "default",
+        show_in_foreground: true,
+        show_in_background: true
+      })
+        .setTitle(message.data.title)
+        // .setSubtitle(notification.subtitle)
+        .setBody(message.data.body)
+        // .setData(notification.data)
+        .android.setChannelId(message.data.channelId)
+        // .android.setBadgeIconType()
+        .android.setLargeIcon("ic_notification")
+        // .android.setSmallIcon("ic_notification")
+        .android.setColor(message.data.color)
+        .android.setBigPicture(message.data.big_picture)
+        .android.setPriority(firebase.notifications.Android.Priority.High);
+
+      firebase
+        .notifications()
+        .displayNotification(DataNotification)
+        .catch(err => console.error(err));
     });
   }
 
@@ -239,6 +261,7 @@ export class index extends Component {
     return (
       <View style={styles.Container}>
         <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
+        <OfflineNotice />
         <View
           style={[
             {

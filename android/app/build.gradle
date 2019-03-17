@@ -103,6 +103,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -142,9 +143,13 @@ android {
             }
         }
     }
+    lintOptions{
+        disable 'MissingDefaultResource'
+    }
 }
 
 dependencies {
+    implementation project(':rn-fetch-blob')
     // This should be here already
     implementation project(':react-native-firebase')
 
@@ -152,6 +157,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-base:16.0.1"
     implementation "com.google.firebase:firebase-core:16.0.6"
     implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar' // <-- Add this line if you wish to use badge on Android
 
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-gesture-handler')

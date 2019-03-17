@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {
   View,
+  Modal,
+  Alert,
   StyleSheet,
   Image,
   AsyncStorage,
@@ -11,6 +13,7 @@ import { Form, Item, Input, Button, Text, Label } from "native-base";
 import Loader from "../Loader";
 import LinearGradient from "react-native-linear-gradient";
 import axios from "axios";
+import OfflineNotice from "../OfflineNotice";
 
 export class index extends Component {
   constructor() {
@@ -20,7 +23,8 @@ export class index extends Component {
       password: "",
       loading: false,
       isAuthenticated: false,
-      errorMessage: ""
+      errorMessage: "",
+      modalVisible: false
     };
   }
 
@@ -92,6 +96,32 @@ export class index extends Component {
       >
         <Form style={styles.Form}>
           <StatusBar backgroundColor="#0069c0" barStyle="light-content" />
+          <OfflineNotice />
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+            }}
+          >
+            <View style={{ marginTop: 22 }}>
+              <View>
+                <Text>Hello World!</Text>
+
+                <Button
+                  block
+                  rounded
+                  style={[styles.Item, { marginLeft: 50, marginRight: 50 }]}
+                  onPress={() => {
+                    this.setState({ modalVisible: false });
+                  }}
+                >
+                  <Text>Hide Modal</Text>
+                </Button>
+              </View>
+            </View>
+          </Modal>
           <Image
             source={require("../../assets/img/logo_manorbois-white.png")}
             style={{ height: 120, width: 200 }}
@@ -129,6 +159,16 @@ export class index extends Component {
             {this.state.errorMessage}
           </Text>
           {this.renderLoader()}
+          {/* <Button
+            block
+            rounded
+            style={[styles.Item, { marginLeft: 50, marginRight: 50 }]}
+            onPress={() => {
+              this.setState({ modalVisible: true });
+            }}
+          >
+            <Text>Show Modal</Text>
+          </Button> */}
         </Form>
       </ImageBackground>
       // </LinearGradient>

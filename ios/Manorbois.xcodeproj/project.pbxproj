@@ -60,6 +60,8 @@
 		C68DDE6603E8440E879D8CE0 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3802EB85C0B0430AA3F5ABC6 /* libRNGestureHandler.a */; };
 		7206DAD255DE47F68CB7F8B1 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06760E15B5694C45B92D3A19 /* libBVLinearGradient.a */; };
 		38FEE9EF24F6482383E2E780 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A98568EFE5414F208F14FAB9 /* libRNFirebase.a */; };
+		D424C262716847D4B6220CC5 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC953614982241A78D176FA3 /* libRNFetchBlob.a */; };
+		FC534BC8733646568ECC385C /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4936DF8B74BC4925984A4669 /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +393,10 @@
 		06760E15B5694C45B92D3A19 /* libBVLinearGradient.a */ = {isa = PBXFileReference; name = "libBVLinearGradient.a"; path = "libBVLinearGradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		85C4A4B4A6ED435DB5E8E0B4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; name = "RNFirebase.xcodeproj"; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		A98568EFE5414F208F14FAB9 /* libRNFirebase.a */ = {isa = PBXFileReference; name = "libRNFirebase.a"; path = "libRNFirebase.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		3B38E30FC0C545A3AE407F3D /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		CC953614982241A78D176FA3 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		7195FC6A76424E8DA4DDA8AC /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		4936DF8B74BC4925984A4669 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +428,8 @@
 				C68DDE6603E8440E879D8CE0 /* libRNGestureHandler.a in Frameworks */,
 				7206DAD255DE47F68CB7F8B1 /* libBVLinearGradient.a in Frameworks */,
 				38FEE9EF24F6482383E2E780 /* libRNFirebase.a in Frameworks */,
+				D424C262716847D4B6220CC5 /* libRNFetchBlob.a in Frameworks */,
+				FC534BC8733646568ECC385C /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +622,8 @@
 				D264A470B40A4D8FAD1B658F /* RNGestureHandler.xcodeproj */,
 				9A447F5C16C14D2EB12792D4 /* BVLinearGradient.xcodeproj */,
 				85C4A4B4A6ED435DB5E8E0B4 /* RNFirebase.xcodeproj */,
+				3B38E30FC0C545A3AE407F3D /* RNFetchBlob.xcodeproj */,
+				7195FC6A76424E8DA4DDA8AC /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1286,15 +1296,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Manorbois.app/Manorbois";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Debug;
@@ -1316,15 +1325,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Manorbois.app/Manorbois";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Release;
@@ -1350,6 +1358,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Debug;
@@ -1374,6 +1384,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Release;
@@ -1403,15 +1415,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Debug;
@@ -1441,15 +1452,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Release;
@@ -1478,15 +1488,14 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Debug;
@@ -1515,15 +1524,14 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-maps\lib\ios/**",
 				);
 			};
 			name = Release;

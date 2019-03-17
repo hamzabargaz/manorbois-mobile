@@ -29,6 +29,40 @@ export class index extends Component {
     title: "Update"
   };
 
+  componentDidMount() {
+    this._getuserData();
+  }
+
+  _getuserData = async () => {
+    const {
+      nom,
+      prenom,
+      telephone,
+      adresse,
+      password,
+      confirmationpassword
+    } = this.state;
+    const iduser = await AsyncStorage.getItem("user_id");
+
+    axios({
+      method: "post",
+      url: "https://seetrip.fun/codgen/Cls/getUser/" + iduser + ""
+    })
+      .then(response => {
+        console.log("response get user is : ", response.data);
+        this.setState({
+          nom: response.data.user["0"].last_name,
+          prenom: response.data.user["0"].first_name,
+          telephone: response.data.user["0"].phone,
+          adresse: response.data.user["0"].adresse,
+          loading: false
+        });
+      })
+      .catch(err => {
+        console.log("Error logging in : ...", err);
+      });
+  };
+
   _Updateuser = async () => {
     const {
       nom,
@@ -135,6 +169,7 @@ export class index extends Component {
               <Input
                 placeholder="Nom"
                 style={styles.Textfield}
+                value={this.state.nom}
                 onChangeText={value => {
                   this.setState({ nom: value });
                 }}
@@ -145,6 +180,7 @@ export class index extends Component {
               <Input
                 placeholder="Prenom"
                 style={styles.Textfield}
+                value={this.state.prenom}
                 onChangeText={value => {
                   this.setState({ prenom: value });
                 }}
@@ -155,6 +191,7 @@ export class index extends Component {
               <Input
                 placeholder="Téléphone"
                 style={styles.Textfield}
+                value={this.state.telephone}
                 onChangeText={value => {
                   this.setState({ telephone: value });
                 }}
