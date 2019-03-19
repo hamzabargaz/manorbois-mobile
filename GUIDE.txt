@@ -1,0 +1,14 @@
+
+1 - download the project and put it in some folder
+
+2 - follow these steps in this URL https://facebook.github.io/react-native/docs/getting-started 
+    from --Installing dependencies-- (WINDOWS - ANDROID) to ==>  --Creating a new  application-- 
+
+3 - (make sure you've followed the steps in the link above) open terminal and cd to the folder of the project
+
+4 - on terminal type "npm install" (wait until all dependencies is installed)
+
+5 - to run the project in your phone directly android, branch the phone with your pc, make sure you've enebled DEVELOPER OPTIONS and checked USB DEBUGGING, then go 
+    type in the terminal "react-native run-android" 
+
+6 - to generate the apk type in terminal "cd android &&  ./gradlew assembleRelease"
